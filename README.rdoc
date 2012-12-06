@@ -1,0 +1,6 @@
+= dvarmobi
+
+Describe your project here
+
+:include:dvarmobi.rdoc
+

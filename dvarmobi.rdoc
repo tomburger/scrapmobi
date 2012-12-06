@@ -1,0 +1,5 @@
+= dvarmobi
+
+Generate this with
+    dvarmobi rdoc
+After you have described your command line interface
