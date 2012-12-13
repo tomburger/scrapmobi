@@ -1,17 +1,10 @@
 #!/usr/bin/env ruby
 require 'gli'
-begin # XXX: Remove this begin/rescue before distributing your app
-require 'dvarmobi'
-rescue LoadError
-  STDERR.puts "In development, you need to use `bundle exec bin/todo` to run your app"
-  STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
-  STDERR.puts "Feel free to remove this message from bin/dvarmobi now"
-  exit 64
-end
+require 'dvarmobi'  
 
 include GLI::App
 
-program_desc 'Describe your application here'
+program_desc 'Dvarmobi prepares your weekly torah reading in ePUB and MOBI formats'
 
 version Dvarmobi::VERSION
 
@@ -30,6 +23,14 @@ pre do |global,command,options,args|
   # Use skips_pre before a command to skip this block
   # on that command only
   true
+end
+
+command :download do |c|
+  c.action do |global,options,args|
+    args.each do |page|
+      puts Download.download(page)
+    end
+  end
 end
 
 post do |global,command,options,args|

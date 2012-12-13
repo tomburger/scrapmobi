@@ -10,9 +10,10 @@ spec = Gem::Specification.new do |s|
   s.summary = 'A description of your project'
 # Add your other files here if you make them
   s.files = %w(
-bin/dvarmobi
-lib/dvarmobi/version.rb
-lib/dvarmobi.rb
+    bin/dvarmobi
+    lib/dvarmobi/version.rb
+    lib/dvarmobi/download.rb
+    lib/dvarmobi.rb
   )
   s.require_paths << 'lib'
   s.has_rdoc = true
@@ -24,4 +25,5 @@ lib/dvarmobi.rb
   s.add_development_dependency('rdoc')
   s.add_development_dependency('aruba')
   s.add_runtime_dependency('gli','2.5.0')
+  s.add_runtime_dependency('nokogiri','1.5.5')
 end
