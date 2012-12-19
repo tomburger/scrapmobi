@@ -27,8 +27,21 @@ end
 
 command :download do |c|
   c.action do |global,options,args|
+    if !(File.exists?("scrap")) 
+      Dir.mkdir("scrap")
+    else
+      Dir.foreach("scrap") do |f|
+        if f!= '.' && f != '..'
+          fn = File.join("scrap", f)
+          File.delete(fn)
+        end
+      end
+    end
     args.each do |page|
-      puts Download.download(page)
+      content = Download.download(page)
+      File.open("scrap/"+page+".html", "w+") do |f|
+        f.write(content)
+      end
     end
   end
 end

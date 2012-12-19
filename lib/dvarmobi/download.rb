@@ -12,12 +12,20 @@ class Download
       :remove => [ '.noprint' ]
     },
     "sacks" => {
-      :host => 'http://www.chiefrabbi.org/',
+      :host => 'http://www.chiefrabbi.org',
       :index => '/category/covenantandconversation/',
       :ix_sel => 'div#content article:first-child a.entry-title',
       :attr => 'href',
       :tx_sel => 'div.entry',
       :remove => [ '.addthis_toolbox', '#attachment_255' ]
+    },
+    "urj" => {
+      :host => 'http://urj.org',
+      :index => '/learning/torah/',
+      :ix_sel => 'div.Sheet2660 td.cnt1021Content a',
+      :attr => 'href',
+      :tx_sel => 'div.Content table.body div table tr:nth-child(2) td',
+      :remove => [ 'div' ]
     }
   } 
   def self.download(page)
