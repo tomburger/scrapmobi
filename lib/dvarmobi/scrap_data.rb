@@ -8,7 +8,7 @@ class ScrapData
       if (args.length == 0)
         return @data[name]
       else
-        @data[name] = args[0]
+        @data.store(name, args[0])
         return self
       end
     end
@@ -26,7 +26,7 @@ class ScrapData
   def add(page) 
     page_obj = PageObj.new(page) 
     yield page_obj
-    @scrap_data[page] = page_obj
+    @scrap_data.store(page, page_obj)
   end
   
   def get(page)
@@ -45,8 +45,9 @@ class ScrapData
   def self.prepare
     f = Fiber.new do
       config = ScrapData.new
-      $SAFE = 4
-      config.instance_eval(File.read('./Dvarmobi.config'))
+      str = File.read('./Dvarmobi.config')
+      #$SAFE = 4
+      config.instance_eval(str)
       Fiber.yield config
     end
     @@config = f.resume
