@@ -1,30 +1,32 @@
 class ScrapData
-  @@scrap_data = {
-    "ohr" => {
-      :host => 'http://ohr.edu',
-      :index => '/this_week/torah_weekly/',
-      :ix_sel => 'div.latest_in_series a',
-      :attr => 'href',
-      :tx_sel => 'div#text',
-      :remove => [ '.noprint' ]
-    },
-    "sacks" => {
-      :host => 'http://www.chiefrabbi.org',
-      :index => '/category/covenantandconversation/',
-      :ix_sel => 'div#content article:first-child a.entry-title',
-      :attr => 'href',
-      :tx_sel => 'div.entry',
-      :remove => [ '.addthis_toolbox', '#attachment_255' ]
-    },
-    "urj" => {
-      :host => 'http://urj.org',
-      :index => '/learning/torah/',
-      :ix_sel => 'div.Sheet2660 td.cnt1021Content a',
-      :attr => 'href',
-      :tx_sel => 'div.Content table.body div table tr:nth-child(2) td',
-      :remove => [ 'div' ]
-    }
-  }
+  @@scrap_data = {}
+
+  class PageObj
+    def initialize(page)
+      @data = {}
+    end
+    def method_missing(name, *args)
+      if (args.length == 0)
+        return @data[name]
+      else
+        @data[name] = args[0]
+        return self
+      end
+    end
+    def each 
+      @data.each do |key,value|
+        yield key,value
+      end
+    end
+  end
+
+  def self.add(page) 
+    page_obj = PageObj.new(page) 
+    yield page_obj
+    @@scrap_data[page] = page_obj
+  end
+  
+  require './Dvarmobi'
   
   def self.get(page)
     return @@scrap_data[page]
