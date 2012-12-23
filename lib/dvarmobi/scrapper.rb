@@ -1,9 +1,9 @@
 class Scrapper
   def self.run(args)
-    Download.prepare_folder()
+    Utils.prepare_folder('scrap')
     Download.download(args) do |page, content|
       File.open("scrap/"+page+".html", "w+") do |f|
-        f.write(content)
+        f.write("<htm><body>#{content}</body></html>")
       end
     end
   end

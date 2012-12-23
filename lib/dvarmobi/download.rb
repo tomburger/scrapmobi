@@ -2,18 +2,6 @@ require 'open-uri'
 require 'nokogiri'
 
 class Download
-  def self.prepare_folder
-    if !(File.exists?("scrap")) 
-      Dir.mkdir("scrap")
-    else
-      Dir.foreach("scrap") do |f|
-        if f!= '.' && f != '..'
-          fn = File.join("scrap", f)
-          File.delete(fn)
-        end
-      end
-    end
-  end
   def self.download(args)
     args.each do |page|
       content = Download.download_one(page)
@@ -21,7 +9,7 @@ class Download
     end
   end
   def self.download_one(page)
-    pg_data = ScrapData.get(page)
+    pg_data = ScrapData.config.get(page)
     
     # get index page, which is always the same, find the link to current page
     index = Nokogiri::HTML(open(pg_data.host+pg_data.index))

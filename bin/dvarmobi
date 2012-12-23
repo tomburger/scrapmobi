@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
-require 'gli'
 require 'dvarmobi'  
-
-require './dvarmobi'  
 
 include GLI::App
 
@@ -19,11 +16,7 @@ arg_name 'The name of the argument'
 flag [:f,:flagname]
 
 pre do |global,command,options,args|
-  # Pre logic here
-  # Return true to proceed; false to abort and not call the
-  # chosen command
-  # Use skips_pre before a command to skip this block
-  # on that command only
+  ScrapData.prepare
   true
 end
 
@@ -39,12 +32,6 @@ command :details do |c|
   end
 end
 
-command :scrap do |c|
-  c.action do |global,options,args|
-    Scrapper.run(args)
-  end
-end
-
 command :download do |c|
   c.action do |global,options,args|
     Download.download(args) do |page, content|
@@ -53,6 +40,19 @@ command :download do |c|
       puts '-----------'
       puts content
     end
+  end
+end
+
+command :scrap do |c|
+  c.action do |global,options,args|
+    Scrapper.run(args)
+  end
+end
+
+command :epub do |c|
+  c.action do |global,options,args|
+    Scrapper.run(args)
+    Ebook.as_epub(args)
   end
 end
 

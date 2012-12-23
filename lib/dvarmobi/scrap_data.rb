@@ -1,5 +1,4 @@
 class ScrapData
-  @@scrap_data = {}
 
   class PageObj
     def initialize(page)
@@ -20,18 +19,36 @@ class ScrapData
     end
   end
 
-  def self.add(page) 
-    page_obj = PageObj.new(page) 
-    yield page_obj
-    @@scrap_data[page] = page_obj
+  def initialize
+    @scrap_data = {}
   end
   
-  def self.get(page)
-    return @@scrap_data[page]
+  def add(page) 
+    page_obj = PageObj.new(page) 
+    yield page_obj
+    @scrap_data[page] = page_obj
   end
-  def self.each
-    @@scrap_data.each do |key, value|
+  
+  def get(page)
+    return @scrap_data[page]
+  end
+  def each
+    @scrap_data.each do |key, value|
       yield key, value
     end
+  end
+  
+  @@config = nil
+  def self.config
+    return @@config
+  end
+  def self.prepare
+    f = Fiber.new do
+      config = ScrapData.new
+      $SAFE = 4
+      config.instance_eval(File.read('./Dvarmobi.config'))
+      Fiber.yield config
+    end
+    @@config = f.resume
   end
 end
