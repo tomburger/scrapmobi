@@ -2,6 +2,8 @@
 require 'gli'
 require 'dvarmobi'  
 
+require './dvarmobi'  
+
 include GLI::App
 
 program_desc 'Dvarmobi prepares your weekly torah reading in ePUB and MOBI formats'
@@ -27,24 +29,19 @@ end
 
 command :pages do |c|
   c.action do |global,options,args|
-    Download.print_pages()
+    Pages.print()
   end
 end
 
 command :details do |c|
   c.action do |global,options,args|
-    Download.print_pages(args)
+    Pages.print(args)
   end
 end
 
 command :scrap do |c|
   c.action do |global,options,args|
-    Download.prepare_folder()
-    Download.download(args) do |page, content|
-      File.open("scrap/"+page+".html", "w+") do |f|
-        f.write(content)
-      end
-    end
+    Scrapper.run(args)
   end
 end
 

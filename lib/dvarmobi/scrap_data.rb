@@ -26,8 +26,6 @@ class ScrapData
     @@scrap_data[page] = page_obj
   end
   
-  require './Dvarmobi'
-  
   def self.get(page)
     return @@scrap_data[page]
   end

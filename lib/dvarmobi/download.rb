@@ -44,23 +44,4 @@ class Download
     
     return text.to_html() 
   end
-  
-  def self.print_pages(args=nil)
-    if (args == nil)
-      puts 'Pages available'
-      ScrapData.each do |key, value|
-        puts "#{key}: #{value.title}"
-      end
-    else
-      args.each do |page|
-        pg_data = ScrapData.get(page)
-        puts pg_data.title
-        puts '================================'
-        pg_data.each do |key,value|
-          puts "  #{key}: #{value}" if key != 'title'
-        end
-        puts
-      end
-    end
-  end
 end
