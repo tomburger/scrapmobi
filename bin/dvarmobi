@@ -8,8 +8,8 @@ program_desc 'Dvarmobi prepares your weekly torah reading in ePUB and MOBI forma
 
 version Dvarmobi::VERSION
 
-desc 'Describe some switch here'
-switch [:s,:switch]
+desc 'If on, there is no information outputted on STDERR, only error messages'
+switch [:silent]
 
 desc 'Describe some flag here'
 default_value 'the default'
@@ -25,23 +25,30 @@ pre do |global,command,options,args|
   true
 end
 
-command :download do |c|
+command :pages do |c|
   c.action do |global,options,args|
-    if !(File.exists?("scrap")) 
-      Dir.mkdir("scrap")
-    else
-      Dir.foreach("scrap") do |f|
-        if f!= '.' && f != '..'
-          fn = File.join("scrap", f)
-          File.delete(fn)
-        end
-      end
-    end
-    args.each do |page|
-      content = Download.download(page)
+    Download.print_pages()
+  end
+end
+
+command :scrap do |c|
+  c.action do |global,options,args|
+    Download.prepare_folder()
+    Download.download(args) do |page, content|
       File.open("scrap/"+page+".html", "w+") do |f|
         f.write(content)
       end
+    end
+  end
+end
+
+command :download do |c|
+  c.action do |global,options,args|
+    Download.download(args) do |page, content|
+      puts '-----------'
+      puts 'Now downloading ' + page + '...'
+      puts '-----------'
+      puts content
     end
   end
 end

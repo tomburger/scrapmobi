@@ -2,34 +2,26 @@ require 'open-uri'
 require 'nokogiri'
 
 class Download
-  @@scrap_data = {
-    "ohr" => {
-      :host => 'http://ohr.edu',
-      :index => '/this_week/torah_weekly/',
-      :ix_sel => 'div.latest_in_series a',
-      :attr => 'href',
-      :tx_sel => 'div#text',
-      :remove => [ '.noprint' ]
-    },
-    "sacks" => {
-      :host => 'http://www.chiefrabbi.org',
-      :index => '/category/covenantandconversation/',
-      :ix_sel => 'div#content article:first-child a.entry-title',
-      :attr => 'href',
-      :tx_sel => 'div.entry',
-      :remove => [ '.addthis_toolbox', '#attachment_255' ]
-    },
-    "urj" => {
-      :host => 'http://urj.org',
-      :index => '/learning/torah/',
-      :ix_sel => 'div.Sheet2660 td.cnt1021Content a',
-      :attr => 'href',
-      :tx_sel => 'div.Content table.body div table tr:nth-child(2) td',
-      :remove => [ 'div' ]
-    }
-  } 
-  def self.download(page)
-    page = @@scrap_data[page]
+  def self.prepare_folder
+    if !(File.exists?("scrap")) 
+      Dir.mkdir("scrap")
+    else
+      Dir.foreach("scrap") do |f|
+        if f!= '.' && f != '..'
+          fn = File.join("scrap", f)
+          File.delete(fn)
+        end
+      end
+    end
+  end
+  def self.download(args)
+    args.each do |page|
+      content = Download.download_one(page)
+      yield page, content
+    end
+  end
+  def self.download_one(page)
+    page = ScrapData.get(page)
     
     # get index page, which is always the same, find the link to current page
     index = Nokogiri::HTML(open(page[:host]+page[:index]))
@@ -51,5 +43,11 @@ class Download
     end
     
     return text.to_html() 
+  end
+  def self.print_pages
+    puts 'Pages available'
+    ScrapData.each do |key, value|
+      puts key
+    end
   end
 end
