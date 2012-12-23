@@ -44,9 +44,9 @@ class ScrapData
   end
   def self.prepare
     f = Fiber.new do
-      config = ScrapData.new
       str = File.read('./Dvarmobi.config')
-      #$SAFE = 4
+      $SAFE = 4
+      config = ScrapData.new
       config.instance_eval(str)
       Fiber.yield config
     end
