@@ -1,5 +1,6 @@
 require 'zip/zipfilesystem'
 require 'zip/zip'
+require 'open3'
 
 class Ebook
   def self.as_epub(pages)
@@ -16,6 +17,11 @@ class Ebook
         z.add('OEBPS/'+f,'./scrap/'+f)
       end
     end
+  end
+  def self.to_mobi
+    stdout_str, stderr_str, status = Open3.capture3('kindlegen ./ebook/dvarmobi.epub')
+    puts stdout_str
+    puts stderr_str
   end
   def self.prepare_opf(z, pages)
     z.get_output_stream('OEBPS/Content.opf') do |f|
