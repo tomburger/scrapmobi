@@ -49,6 +49,12 @@ command :scrap do |c|
   end
 end
 
+command :package do |c|
+  c.action do |global,options,args|
+    Ebook.as_epub(args)
+  end
+end
+
 command :epub do |c|
   c.action do |global,options,args|
     Scrapper.run(args)

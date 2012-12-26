@@ -1,0 +1,8 @@
+<navPoint id="#ID" playOrder="#INDEX">
+    <navLabel>
+        <text>#TITLE</text>
+    </navLabel>
+    <content src="#ID.xhtml"/>
+</navPoint>
+
+
