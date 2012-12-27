@@ -4,7 +4,8 @@ require 'nokogiri'
 class Download
   def self.download(args)
     args.each do |page|
-      content = Download.download_one(page)
+      content = download_one(page)
+      content = convert(page, content)
       yield page, content
     end
   end
@@ -23,7 +24,11 @@ class Download
     
     # get actual page with content
     tx_page = Nokogiri::HTML(open(tx_url))
-    text = tx_page.at_css(pg_data.tx_sel)
+    
+    return tx_page.at_css(pg_data.tx_sel)
+  end 
+  def self.convert(page, text)
+    pg_data = ScrapData.config.get(page)
     
     # remove not wanted pieces
     pg_data.remove.each do |selector|

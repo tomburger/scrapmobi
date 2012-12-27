@@ -83,6 +83,7 @@ EOF
   <head>
     <title><%= title %></title>
     <link rel="stylesheet" type="text/css" href="styles.css"></link>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
   <body>
     <h1><%= title %></h1>
