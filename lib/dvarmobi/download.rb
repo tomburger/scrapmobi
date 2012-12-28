@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
+require 'cgi'
 
 class Download
   def self.download(args)
@@ -35,6 +36,10 @@ class Download
       text.css(selector).remove()
     end
     
-    return text.to_html() 
+    txt = text.to_html()
+    txt = txt.encode("UTF-8")
+    txt = CGI.unescapeHTML(txt)
+    
+    return txt 
   end
 end
