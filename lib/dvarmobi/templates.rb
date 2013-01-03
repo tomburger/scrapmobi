@@ -72,7 +72,7 @@ EOF
   end
   def self.styles
     return <<-EOF
-h1 { font-size: 3em; }
+h1 { font-size: 1.2em; }
 EOF
   end
   def self.chapter
