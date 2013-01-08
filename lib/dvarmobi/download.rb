@@ -46,17 +46,9 @@ end
 class Download
   def self.download(args)
     args.each do |page|
-      pg_data = ScrapData.config.get(page)
+      action = ScrapData.config.action(page)
       content = Downloader.new
-      content.set_host(pg_data.host)
-             .start_with(pg_data.index)
-             .get_page
-             .get_link(pg_data.ix_sel)
-             .get_page
-             .get_content(pg_data.tx_sel)
-      pg_data.remove.each do |selector|
-        content.remove(selector)
-      end
+      action.call(content)
       yield page, content.to_text
     end
   end

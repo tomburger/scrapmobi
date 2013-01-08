@@ -2,19 +2,19 @@ class ScrapData
 
   class PageObj
     def initialize(page)
-      @data = {}
     end
-    def method_missing(name, *args)
-      if (args.length == 0)
-        return @data[name]
+    def title(title=nil)
+      if title.nil?
+        @title
       else
-        @data.store(name, args[0])
-        return self
+        @title = title
       end
     end
-    def each 
-      @data.each do |key,value|
-        yield key,value
+    def action(&block)
+      if block.nil?
+        @action
+      else
+        @action = block
       end
     end
   end
@@ -32,9 +32,15 @@ class ScrapData
   def get(page)
     return @scrap_data[page]
   end
+  def title(page)
+    return get(page).title
+  end
+  def action(page)
+    return get(page).action
+  end
   def each
     @scrap_data.each do |key, value|
-      yield key, value
+      yield key, value.title
     end
   end
   
@@ -45,7 +51,7 @@ class ScrapData
   def self.prepare
     f = Fiber.new do
       str = File.read('./Dvarmobi.config')
-      $SAFE = 4
+      #$SAFE = 4
       config = ScrapData.new
       config.instance_eval(str)
       Fiber.yield config

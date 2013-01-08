@@ -26,12 +26,6 @@ command :pages do |c|
   end
 end
 
-command :details do |c|
-  c.action do |global,options,args|
-    Pages.print(args)
-  end
-end
-
 command :download do |c|
   c.action do |global,options,args|
     Download.download(args) do |page, content|

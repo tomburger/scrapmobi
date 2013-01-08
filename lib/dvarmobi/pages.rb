@@ -1,20 +1,8 @@
 class Pages
-  def self.print(pages=nil)
-    if (pages == nil)
-      puts 'Pages available'
-      ScrapData.config.each do |key, value|
-        puts "#{key}: #{value.title}"
-      end
-    else
-      pages.each do |page|
-        pg_data = ScrapData.config.get(page)
-        puts pg_data.title
-        puts '================================'
-        pg_data.each do |key,value|
-          puts "  #{key}: #{value}" if key != 'title'
-        end
-        puts
-      end
+  def self.print
+    puts 'Pages available'
+    ScrapData.config.each do |key, title|
+      puts "#{key}: #{title}"
     end
   end
 end

@@ -44,9 +44,9 @@ class Ebook
     navpoints = ''
     i = 0
     pages.each do |p|
-      dt = ScrapData.config.get(p)
+      t = ScrapData.config.title(p)
       i += 1
-      navpoints += np_tmp.result(:id=>p,:index=>i, :title=>dt.title)
+      navpoints += np_tmp.result(:id=>p,:index=>i, :title=>t)
     end
     
     return toc.result(:navpoints=>navpoints)
