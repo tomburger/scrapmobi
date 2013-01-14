@@ -2,10 +2,13 @@ require 'open-uri'
 require 'nokogiri'
 require 'cgi'
 class Downloader
-  def initialize
+  attr_reader :img
+  def initialize(page)
+    @page = page
     @host = ''
     @url = ''
     @html = nil
+    @img = {}
   end
   def set_host(host)
     @host = host
@@ -16,6 +19,7 @@ class Downloader
     return self
   end
   def get_page
+    puts "Downloading #{@url}"
     @html = Nokogiri::HTML(open(@url))
     @url = ''
     return self
@@ -35,6 +39,17 @@ class Downloader
     @html.css(selector).remove
     return self
   end
+  def images()
+    ix = 0
+    @html.css('img').each do |i| 
+      ix += 1
+      im_name = @page + ix.to_s + ".jpg"
+      @img[im_name] = i['src'] 
+      i['src'] = im_name
+      puts "Image #{im_name} replacement for #{@img[im_name]}"
+    end
+    return self
+  end
   def to_text
     txt = @html.to_html
     txt = txt.encode("UTF-8")
@@ -47,9 +62,9 @@ class Download
   def self.download(args)
     args.each do |page|
       action = ScrapData.config.action(page)
-      content = Downloader.new
+      content = Downloader.new(page)
       action.call(content)
-      yield page, content.to_text
+      yield page, content.to_text, content.img
     end
   end
 end

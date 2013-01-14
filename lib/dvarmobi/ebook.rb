@@ -25,13 +25,15 @@ class Ebook
   end
   def self.prepare_opf(pages)
     opf = Erubis::Eruby.new(Templates.content)
-    man_tmp = Erubis::Eruby.new(Templates.manifest)
+    man_tmp = Erubis::Eruby.new(Templates.manifest_page)
+    img_tmp = Erubis::Eruby.new(Templates.manifest_file)
     spine_tmp = Erubis::Eruby.new(Templates.spine)
    
     manifest = ''
     spine = ''
     pages.each do |p|
       manifest += man_tmp.result(:page=>p)
+      
       spine += spine_tmp.result(:page=>p)
     end
     

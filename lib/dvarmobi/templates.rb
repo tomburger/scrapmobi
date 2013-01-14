@@ -32,8 +32,11 @@ EOF
 </package>
 EOF
   end
-  def self.manifest
+  def self.manifest_page
     return "<item id='<%= page %>' href='<%= page %>.xhtml' media-type='application/xhtml+xml' />"
+  end
+  def self.manifest_file
+    return "<item id='<%= id %>' href='<%= fname %>' media-type='<%= mime %>' />"
   end
   def self.spine
     return "<itemref idref='<%= page %>' />"
