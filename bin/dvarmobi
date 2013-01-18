@@ -28,7 +28,10 @@ end
 
 command :parasha do |c|
   c.action do |global,options,args|
-    puts HebCal.current_parasha(Date.today)
+    parasha = HebCal.current_parasha(Date.today)
+    puts parasha
+    torah = HebCal.torah_portion(parasha)
+    puts torah
   end
 end
 
@@ -64,6 +67,7 @@ end
 
 command :mobi do |c|
   c.action do |global,options,args|
+    args = ScrapData.config.keys if args.empty?
     Scrapper.run(args)
     Ebook.as_epub(args)
     Ebook.to_mobi

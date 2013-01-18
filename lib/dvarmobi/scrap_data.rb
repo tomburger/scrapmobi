@@ -43,6 +43,9 @@ class ScrapData
       yield key, value.title
     end
   end
+  def keys
+    @scrap_data.keys
+  end
   
   @@config = nil
   def self.config
