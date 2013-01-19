@@ -24,6 +24,13 @@ class Downloader
     @url = ''
     return self
   end
+  def load_file(fname)
+    File.open(fname, 'r') do |f|
+      @html = Nokogiri::HTML(f)
+    end
+    @url = ''
+    return self
+  end
   def get_link(selector)
     link = @html.at_css(selector)
     @url = link['href']
@@ -33,6 +40,10 @@ class Downloader
   end
   def get_content(selector)
     @html = @html.css(selector)
+    return self
+  end
+  def step_in
+    @html = @html.children
     return self
   end
   def remove(selector)
@@ -51,7 +62,7 @@ class Downloader
     return self
   end
   def to_text
-    txt = @html.to_html
+    txt = @html.to_xhtml
     txt = txt.encode("UTF-8")
     txt = CGI.unescapeHTML(txt)
     return txt 
