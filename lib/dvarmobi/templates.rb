@@ -11,8 +11,8 @@ EOF
   end
   def self.content
     return <<-EOF
-<?xml version="1.0" encoding="UTF-8"??>
-<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookID" version="2.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookID" version="2.0">
     <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
         <dc:title>Dvarmobi</dc:title> 
         <dc:creator opf:role="aut">Tom Burger</dc:creator>

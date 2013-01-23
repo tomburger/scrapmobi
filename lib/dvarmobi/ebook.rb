@@ -7,7 +7,7 @@ class Ebook
   def self.as_epub(pages)
     Utils.prepare_folder('ebook')
     Zip::ZipFile.open('./ebook/dvarmobi.epub', Zip::ZipFile::CREATE) do |z|
-      z.get_output_stream('mimetype') { |f| f.puts 'application/epub+zip' }
+      z.get_output_stream('mimetype') { |f| f.write 'application/epub+zip' }
       z.mkdir('META-INF')
       z.get_output_stream('META-INF/container.xml') { |f| f.puts Templates.container }
       z.mkdir('OEBPS')
