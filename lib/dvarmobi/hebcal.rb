@@ -78,6 +78,11 @@ class HebCal
       d1 = d2 - 6
       result = p["link"] if (d1..d2).include? date 
     end
+    if result.empty?
+      d = date + 7   # saturday could alredy be within next month
+      result = current_parasha(d) if m < d.month
+    end
+    raise "Parasha for day #{date} not found" if result.empty? 
     return result[/(\w)+$/] # last word of the link (after last "/")
   end
   
