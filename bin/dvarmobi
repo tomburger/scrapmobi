@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'dvarmobi'  
+require 'mail'
 
 include GLI::App
 
@@ -76,6 +77,19 @@ command :mobi do |c|
     Scrapper.run(args)
     Ebook.as_epub(args)
     Ebook.to_mobi
+  end
+end
+
+command :email do |c|
+  c.action do |global,options,args|
+    mail = Mail.new do 
+      from    'tomas@burger.cz'
+      to      'tomas_touch@free.kindle.com'
+      subject 'New DvarMobi'
+      body    'Weekly reading delivered to your mailbox'
+    end
+    mail.add_file './ebook/dvarmobi.mobi'
+    mail.deliver!
   end
 end
 
