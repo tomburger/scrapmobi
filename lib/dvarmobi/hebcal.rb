@@ -66,21 +66,28 @@ class HebCal
     
   }
   
+  def self.service_call(m, y)
+    u = "http://www.hebcal.com/hebcal/?v=1;cfg=json;year=#{y};month=#{m};s=on;i=off;c=off"
+    RestClient.get u
+  end
+  
   def self.current_parasha(date)
     m = date.month
     y = date.year
-    u = "http://www.hebcal.com/hebcal/?v=1;cfg=json;year=#{y};month=#{m};s=on;i=off;c=off"
-    r = RestClient.get u
-    j = JSON.parse r
+    j = JSON.parse service_call(m, y)
     result = ''
+    d1 = d2 = nil
     j["items"].each do |p|
       d2 = Date.parse(p["date"])
       d1 = d2 - 6
       result = p["link"] if (d1..d2).include? date 
     end
     if result.empty?
-      d = date + 7   # saturday could alredy be within next month
-      result = current_parasha(d) if m < d.month
+      if d2 < date # saturday could alredy be within next month
+        d = date + 7   
+        d = Date.new(d.year, d.month, 1)
+        result = current_parasha(d) 
+      end
     end
     raise "Parasha for day #{date} not found" if result.empty? 
     return result[/(\w)+$/] # last word of the link (after last "/")

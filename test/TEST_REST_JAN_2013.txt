@@ -1,0 +1,35 @@
+{
+    "title": "Hebcal January 2013",
+    "link": "http://www.hebcal.com/hebcal/?v=1;year=2013;month=1;s=on;i=off;c=off",
+    "date": "2013-02-08T21:34:20-00:00",
+    "items": [
+        {
+            "title": "Parashat Shemot",
+            "category": "parashat",
+            "date": "2013-01-05",
+            "link": "http://www.hebcal.com/sedrot/shemot",
+            "hebrew": "???? ????"
+        },
+        {
+            "title": "Parashat Vaera",
+            "category": "parashat",
+            "date": "2013-01-12",
+            "link": "http://www.hebcal.com/sedrot/vaera",
+            "hebrew": "???? ????"
+        },
+        {
+            "title": "Parashat Bo",
+            "category": "parashat",
+            "date": "2013-01-19",
+            "link": "http://www.hebcal.com/sedrot/bo",
+            "hebrew": "???? ??"
+        },
+        {
+            "title": "Parashat Beshalach",
+            "category": "parashat",
+            "date": "2013-01-26",
+            "link": "http://www.hebcal.com/sedrot/beshialach",
+            "hebrew": "???? ????"
+        }
+    ]
+}

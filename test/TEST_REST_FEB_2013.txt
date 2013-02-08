@@ -1,0 +1,35 @@
+{
+    "title": "Hebcal February 2013",
+    "link": "http://www.hebcal.com/hebcal/?v=1;year=2013;month=2;s=on;i=off;c=off",
+    "date": "2013-02-08T21:35:33-00:00",
+    "items": [
+        {
+            "title": "Parashat Yitro",
+            "category": "parashat",
+            "date": "2013-02-02",
+            "link": "http://www.hebcal.com/sedrot/yitro",
+            "hebrew": "???? ????"
+        },
+        {
+            "title": "Parashat Mishpatim",
+            "category": "parashat",
+            "date": "2013-02-09",
+            "link": "http://www.hebcal.com/sedrot/mishpatim",
+            "hebrew": "???? ??????"
+        },
+        {
+            "title": "Parashat Terumah",
+            "category": "parashat",
+            "date": "2013-02-16",
+            "link": "http://www.hebcal.com/sedrot/terumah",
+            "hebrew": "???? ?????"
+        },
+        {
+            "title": "Parashat Tetzaveh",
+            "category": "parashat",
+            "date": "2013-02-23",
+            "link": "http://www.hebcal.com/sedrot/tetzaveh",
+            "hebrew": "???? ????"
+        }
+    ]
+}
