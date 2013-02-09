@@ -4,9 +4,14 @@ require 'open3'
 require 'erubis'
 
 class Ebook
+  def self.filename
+    "./ebook/#{ScrapData.config.fname}.epub"
+  end
   def self.as_epub(pages)
+    puts "Assembling file #{self.filename}"
+    puts "Title: #{ScrapData.config.book_title}"
     Utils.prepare_folder('ebook')
-    Zip::ZipFile.open('./ebook/scrapmobi.epub', Zip::ZipFile::CREATE) do |z|
+    Zip::ZipFile.open(self.filename, Zip::ZipFile::CREATE) do |z|
       z.get_output_stream('mimetype') { |f| f.write 'application/epub+zip' }
       z.mkdir('META-INF')
       z.get_output_stream('META-INF/container.xml') { |f| f.puts Templates.container }
@@ -21,7 +26,8 @@ class Ebook
     end
   end
   def self.to_mobi
-    stdout_str, stderr_str, status = Open3.capture3('kindlegen ./ebook/scrapmobi.epub')
+    puts "Turning file #{self.filename} into Kindle Mobi"
+    stdout_str, stderr_str, status = Open3.capture3('kindlegen ' + self.filename)
   end
   def self.prepare_opf(pages)
     opf = Erubis::Eruby.new(Templates.content)
@@ -35,8 +41,11 @@ class Ebook
       # loop through files in scrap folder...
       spine += spine_tmp.result(:page=>p)
     end
-    
-    return opf.result(:manifest=>manifest,:spine=>spine)
+  
+    return opf.result(
+                      :title => ScrapData.config.book_title,
+                      :book_id => "cz.burger.scrapmobi.#{ScrapData.config.fname}",                      
+                      :manifest=>manifest, :spine=>spine)
   end
   def self.prepare_ncx(pages)
     toc = Erubis::Eruby.new(Templates.toc)
@@ -45,11 +54,14 @@ class Ebook
     navpoints = ''
     i = 0
     pages.each do |p|
-      t = ScrapData.config.title(p)
+      t = ScrapData.config.page_title(p)
       i += 1
       navpoints += np_tmp.result(:id=>p,:index=>i, :title=>t)
     end
     
-    return toc.result(:navpoints=>navpoints)
+    return toc.result(
+                    :title => ScrapData.config.book_title,
+                    :book_id => "cz.burger.scrapmobi.#{ScrapData.config.fname}",                      
+                    :navpoints=>navpoints)
   end
 end

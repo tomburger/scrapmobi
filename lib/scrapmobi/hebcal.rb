@@ -88,9 +88,11 @@ class HebCal
         d = Date.new(d.year, d.month, 1)
         result = current_parasha(d) 
       end
+    else
+      result = result[/(\w)+$/] # last word of the link (after last "/")
     end
     raise "Parasha for day #{date} not found" if result.empty? 
-    return result[/(\w)+$/] # last word of the link (after last "/")
+    return result
   end
   
   def self.torah_portion(parasha)
@@ -101,8 +103,8 @@ class HebCal
     end
   end
   
-  def self.link_to_parasha(version)
-    "/passage/?search=#{torah_portion(current_parasha(Date.today))}&version=#{version}"
+  def self.link_to_parasha(parasha, version)
+    "/passage/?search=#{torah_portion(parasha)}&version=#{version}"
   end
   
 end
