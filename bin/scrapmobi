@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
-require 'dvarmobi'  
+require 'scrapmobi'  
 require 'mail'
 
 include GLI::App
 
-program_desc 'Dvarmobi prepares your weekly torah reading in ePUB and MOBI formats'
+program_desc 'Scrapmobi prepares your weekly torah reading in ePUB and MOBI formats'
 
-version Dvarmobi::VERSION
+version Scrapmobi::VERSION
 
 desc 'If on, there is no information outputted on STDERR, only error messages'
 switch [:silent]
@@ -85,10 +85,10 @@ command :email do |c|
     mail = Mail.new do 
       from    'tomas@burger.cz'
       to      'tomas_touch@free.kindle.com'
-      subject 'New DvarMobi'
+      subject 'New ScrapMobi'
       body    'Weekly reading delivered to your mailbox'
     end
-    mail.add_file './ebook/dvarmobi.mobi'
+    mail.add_file './ebook/scrapmobi.mobi'
     mail.deliver!
   end
 end

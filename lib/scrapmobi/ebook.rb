@@ -6,7 +6,7 @@ require 'erubis'
 class Ebook
   def self.as_epub(pages)
     Utils.prepare_folder('ebook')
-    Zip::ZipFile.open('./ebook/dvarmobi.epub', Zip::ZipFile::CREATE) do |z|
+    Zip::ZipFile.open('./ebook/scrapmobi.epub', Zip::ZipFile::CREATE) do |z|
       z.get_output_stream('mimetype') { |f| f.write 'application/epub+zip' }
       z.mkdir('META-INF')
       z.get_output_stream('META-INF/container.xml') { |f| f.puts Templates.container }
@@ -21,7 +21,7 @@ class Ebook
     end
   end
   def self.to_mobi
-    stdout_str, stderr_str, status = Open3.capture3('kindlegen ./ebook/dvarmobi.epub')
+    stdout_str, stderr_str, status = Open3.capture3('kindlegen ./ebook/scrapmobi.epub')
   end
   def self.prepare_opf(pages)
     opf = Erubis::Eruby.new(Templates.content)

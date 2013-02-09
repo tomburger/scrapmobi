@@ -1,6 +1,6 @@
-= dvarmobi
+= scrapmobi
 
 Describe your project here
 
-:include:dvarmobi.rdoc
+:include:scrapmobi.rdoc
 

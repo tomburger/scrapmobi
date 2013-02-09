@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dvarmobi (0.0.1)
+    scrapmobi (0.0.1)
       erubis
       gli (= 2.5.0)
       json
@@ -40,7 +40,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mime-types (1.20.1)
+    mime-types (1.21)
     nokogiri (1.5.5)
     nokogiri (1.5.5-x86-mingw32)
     polyglot (0.3.3)
@@ -62,6 +62,6 @@ PLATFORMS
 
 DEPENDENCIES
   aruba
-  dvarmobi!
   rake
   rdoc
+  scrapmobi!

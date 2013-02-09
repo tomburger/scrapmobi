@@ -53,7 +53,7 @@ class ScrapData
   end
   def self.prepare
     f = Fiber.new do
-      str = File.read('./Dvarmobi.config')
+      str = File.read('./Scrapmobi.config')
       #$SAFE = 4
       config = ScrapData.new
       config.instance_eval(str)

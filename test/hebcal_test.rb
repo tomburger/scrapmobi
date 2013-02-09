@@ -3,7 +3,7 @@ require 'date'
 
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__) + '/../lib')
 
-require 'dvarmobi/hebcal.rb'
+require 'scrapmobi/hebcal.rb'
 
 class HebCalTest < Test::Unit::TestCase
   
