@@ -26,7 +26,7 @@ class HebCal
     "mishpatim" => "EX21:1-24:18",
     "terumah" => "EX25:1-27:19",
     "tetzaveh" => "EX27:20-30:10",
-    "ki-tisa" => "EX30:11-34:35",
+    "kitisa" => "EX30:11-34:35",
     "vayakhel" => "EX35:1-38:20",
     "pekudei" => "EX38:21-40:38",
     
