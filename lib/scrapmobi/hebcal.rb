@@ -29,6 +29,7 @@ class HebCal
     "kitisa" => "EX30:11-34:35",
     "vayakhel" => "EX35:1-38:20",
     "pekudei" => "EX38:21-40:38",
+    "vayakhelpekudei" => "EX35:1-40:38",     # double parasha
     
     "vayikra" => "LV1:1-5:26",
     "tzav" => "LV6:1-8:36",
