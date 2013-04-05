@@ -32,7 +32,7 @@ class HebCal
     
     "vayikra" => "LV1:1-5:26",
     "tzav" => "LV6:1-8:36",
-    "shemini" => "LV9:1-11:47",
+    "shmini" => "LV9:1-11:47",
     "tazria" => "LV12:1-13:59",
     "metzora" => "LV14:1-15:33",
     "acharei-mot" => "LV16:1-18:30",
