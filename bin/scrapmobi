@@ -2,8 +2,6 @@
 require 'scrapmobi'  
 require 'mail'
 
-$DEBUG = true
-
 include GLI::App
 
 program_desc 'Scrapmobi prepares your weekly torah reading in ePUB and MOBI formats'
