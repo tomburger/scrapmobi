@@ -5,7 +5,7 @@ require 'rest_client'
 class HebCal
   
   @@torah = {
-    "bereishit" => "GN1:1-6:8",
+    "bereshit" => "GN1:1-6:8",
     "noach" => "GN6:9-11:32",
     "lech-lecha" => "GN12:1-17:27",
     "vayeira" => "GN18:1-22:24",

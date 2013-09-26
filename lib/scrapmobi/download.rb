@@ -42,6 +42,10 @@ class Downloader
     @html = @html.css(selector)
     return self
   end
+  def first_only
+    @html = @html.first
+	return self
+  end
   def step_in
     @html = @html.children
     return self

@@ -1,5 +1,4 @@
-require 'zip/zipfilesystem'
-require 'zip/zip'
+require 'zip'
 require 'open3'
 require 'erubis'
 
@@ -11,7 +10,7 @@ class Ebook
     puts "Assembling file #{self.filename}"
     puts "Title: #{ScrapData.config.book_title}"
     Utils.prepare_folder('ebook')
-    Zip::ZipFile.open(self.filename, Zip::ZipFile::CREATE) do |z|
+    Zip::File.open(self.filename, Zip::File::CREATE) do |z|
       z.get_output_stream('mimetype') { |f| f.write 'application/epub+zip' }
       z.mkdir('META-INF')
       z.get_output_stream('META-INF/container.xml') { |f| f.puts Templates.container }
