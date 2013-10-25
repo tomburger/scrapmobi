@@ -9,7 +9,7 @@ class HebCal
     "noach" => "GN6:9-11:32",
     "lechlecha" => "GN12:1-17:27",
     "vayera" => "GN18:1-22:24",
-    "chayei-sarah" => "GN23:1-25:18",
+    "chayeisara" => "GN23:1-25:18",
     "toledot" => "GN25:19-28:9",
     "vayetze" => "GN28:10-32:3",
     "vayishlach" => "GN32:4-36:43",
