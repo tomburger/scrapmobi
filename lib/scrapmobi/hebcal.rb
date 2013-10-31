@@ -1,3 +1,4 @@
+
 require 'date'
 require 'json'
 require 'rest_client'
@@ -10,7 +11,7 @@ class HebCal
     "lechlecha" => "GN12:1-17:27",
     "vayera" => "GN18:1-22:24",
     "chayeisara" => "GN23:1-25:18",
-    "toledot" => "GN25:19-28:9",
+    "toldot" => "GN25:19-28:9",
     "vayetze" => "GN28:10-32:3",
     "vayishlach" => "GN32:4-36:43",
     "vayeshev" => "GN37:1-40:23",

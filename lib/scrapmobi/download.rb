@@ -1,3 +1,4 @@
+
 require 'open-uri'
 require 'nokogiri'
 require 'cgi'
@@ -32,11 +33,18 @@ class Downloader
     return self
   end
   def get_link(selector)
-    link = @html.at_css(selector)
-    @url = link['href']
-    @url=@host+@url if (@url[0,4].downcase!='http')
-    @html = nil
-    return self
+    if (selector.is_a?(Regexp))
+	  if (selector =~ @html.to_xhtml)
+	    @url = @host+"/"+$~[1]
+		@html = nil
+	  end
+	else
+	  link = @html.at_css(selector)
+	  @url = link['href']
+	  @url=@host+@url if (@url[0,4].downcase!='http')
+	  @html = nil
+    end
+	return self
   end
   def get_content(selector)
     @html = @html.css(selector)
