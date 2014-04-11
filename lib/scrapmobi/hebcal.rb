@@ -37,7 +37,7 @@ class HebCal
     "shmini" => "LV9:1-11:47",
     "tazria" => "LV12:1-13:59",
     "metzora" => "LV14:1-15:33",
-    "acharei-mot" => "LV16:1-18:30",
+    "achreimot" => "LV16:1-18:30",
     "kedoshim" => "LV19:1-20:27",
     "emor" => "LV21:1-24:23",
     "behar" => "LV25:1-26:2",
