@@ -45,7 +45,7 @@ class HebCal
     
     "bamidbar" => "NM1:1-4:20",
     "nasso" => "NM4:21-7:89",
-    "behaalotecha" => "NM8:1-12:16",
+    "behaalotcha" => "NM8:1-12:16",
     "shlach" => "NM13:1-15:41",
     "korach" => "NM16:1-18:32",
     "chukat" => "NM19:1-22:1",
